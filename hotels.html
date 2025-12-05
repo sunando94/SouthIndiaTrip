@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,46 +8,53 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   
   <style>
     :root {
-      --bg: #0a0a0a;
-      --card: #141414;
-      --card-hover: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #e5e5e5;
-      --text-muted: #888;
-      --accent: #3b82f6;
-      --accent-soft: rgba(59, 130, 246, 0.1);
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --bg: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --card: #ffffff;
+      --border: #e9ecef;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --accent: #0d6efd;
+      --accent-soft: rgba(13, 110, 253, 0.1);
+      --success: #198754;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-soft: rgba(88, 166, 255, 0.1);
+      --shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      font-size: 14px;
-    }
-    
-    h1, h2, h3, h4, h5 {
-      font-family: 'Fraunces', serif;
-      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
     }
     
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     
     .navbar-custom {
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(20px);
+      background: var(--card);
       border-bottom: 1px solid var(--border);
       padding: 1rem 0;
       position: sticky;
@@ -56,12 +63,9 @@
     }
     
     .nav-brand {
-      font-family: 'Fraunces', serif;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--text) !important;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
     
     .nav-link-custom {
@@ -70,32 +74,38 @@
       font-weight: 500;
       padding: 0.5rem 1rem !important;
       border-radius: 8px;
-      transition: all 0.2s;
     }
     
     .nav-link-custom:hover, .nav-link-custom.active {
       color: var(--text) !important;
-      background: var(--card);
+      background: var(--bg-secondary);
+    }
+    
+    .theme-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
     }
     
     .page-header {
-      padding: 3rem 0;
-      text-align: center;
+      padding: 2rem 0;
+      background: var(--bg-secondary);
       border-bottom: 1px solid var(--border);
     }
     
     .page-header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
+      font-weight: 700;
     }
     
-    .page-header p {
-      color: var(--text-muted);
-    }
-    
-    .summary-cards {
+    /* Summary Cards */
+    .summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1rem;
       margin: 2rem 0;
     }
@@ -104,38 +114,47 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       text-align: center;
+      box-shadow: var(--shadow);
     }
     
-    .summary-card-value {
-      font-family: 'Fraunces', serif;
-      font-size: 2rem;
-      font-weight: 600;
+    .summary-value {
+      font-size: 1.75rem;
+      font-weight: 700;
       color: var(--accent);
     }
     
-    .summary-card-label {
-      font-size: 0.8rem;
+    .summary-label {
+      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
     
-    .summary-card.paid .summary-card-value { color: var(--success); }
-    .summary-card.unpaid .summary-card-value { color: var(--warning); }
+    .summary-card.success .summary-value { color: var(--success); }
+    .summary-card.warning .summary-value { color: #997404; }
+    .summary-card.danger .summary-value { color: var(--danger); }
     
+    /* Alert */
+    .alert-custom {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      background: rgba(220, 53, 69, 0.1);
+      border: 1px solid var(--danger);
+    }
+    
+    /* Hotel Card */
     .hotel-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       margin-bottom: 1.5rem;
       overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    
-    .hotel-card:hover {
-      border-color: var(--accent);
+      box-shadow: var(--shadow);
     }
     
     .hotel-card.paid { border-left: 4px solid var(--success); }
@@ -143,43 +162,42 @@
     .hotel-card.unpaid { border-left: 4px solid var(--danger); }
     
     .hotel-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: start;
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     
     .hotel-dates {
-      background: var(--bg);
-      padding: 0.4rem 0.8rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.3rem 0.6rem;
       border-radius: 6px;
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--accent);
     }
     
     .hotel-name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.3rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
     }
     
     .hotel-location {
       color: var(--text-muted);
       font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
     
     .hotel-body {
-      padding: 1.5rem;
+      padding: 1.25rem;
     }
     
     .hotel-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1rem;
     }
     
@@ -192,43 +210,40 @@
     .hotel-detail-label {
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--text-muted);
     }
     
     .hotel-detail-value {
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-    
-    .badge-status {
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
       font-weight: 600;
     }
     
-    .badge-paid {
-      background: rgba(34, 197, 94, 0.1);
-      color: var(--success);
+    .badge-paid { background: rgba(25,135,84,0.1); color: var(--success); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-cash { background: rgba(255,193,7,0.2); color: #997404; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-unpaid { background: rgba(220,53,69,0.1); color: var(--danger); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
     }
     
-    .badge-cash {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--warning);
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0;
+      font-size: 0.85rem;
     }
     
-    .badge-unpaid {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--danger);
-    }
+    .checklist li.yes i { color: var(--success); }
+    .checklist li.no i { color: var(--text-muted); }
     
     .hotel-footer {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
-      padding: 1rem 1.5rem;
-      background: var(--bg);
+      padding: 1rem 1.25rem;
+      background: var(--bg-secondary);
       border-top: 1px solid var(--border);
     }
     
@@ -238,7 +253,7 @@
       gap: 0.4rem;
       padding: 0.5rem 1rem;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 500;
       text-decoration: none;
       transition: all 0.2s;
@@ -249,11 +264,7 @@
       color: white;
     }
     
-    .btn-primary-custom:hover {
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-    }
+    .btn-primary-custom:hover { opacity: 0.9; color: white; text-decoration: none; }
     
     .btn-outline-custom {
       background: transparent;
@@ -261,120 +272,113 @@
       color: var(--text);
     }
     
-    .btn-outline-custom:hover {
+    .btn-outline-custom:hover { background: var(--bg-secondary); text-decoration: none; }
+    
+    /* Table */
+    .table-custom {
       background: var(--card);
-      color: var(--text);
-      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
     
-    .alert-custom {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .table-custom table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table-custom th {
+      text-align: left;
       padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
     }
     
-    .alert-custom.warning {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid var(--warning);
+    .table-custom td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .table-custom tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .table-custom .total {
+      font-weight: 700;
+      background: var(--bg-secondary);
     }
     
     .footer {
-      background: var(--card);
+      background: var(--bg-secondary);
       border-top: 1px solid var(--border);
-      padding: 3rem 0;
-      margin-top: 4rem;
-    }
-    
-    .footer-title {
-      font-family: 'Fraunces', serif;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    
-    .footer-text {
+      padding: 2rem 0;
+      text-align: center;
       color: var(--text-muted);
       font-size: 0.85rem;
     }
-    
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .checklist li {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0;
-      font-size: 0.85rem;
-    }
-    
-    .checklist li i {
-      font-size: 1rem;
-    }
-    
-    .checklist li.included i { color: var(--success); }
-    .checklist li.not-included i { color: var(--text-muted); }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="navbar-custom">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
-        <a href="index.html" class="nav-brand">
-          <span>🗺️</span> South India 2026
-        </a>
-        <div class="d-flex gap-1">
+        <a href="index.html" class="nav-brand">🗺️ South India Trip</a>
+        <div class="d-flex align-items-center gap-2">
           <a href="index.html" class="nav-link-custom">Itinerary</a>
           <a href="hotels.html" class="nav-link-custom active">Hotels</a>
           <a href="budget.html" class="nav-link-custom">Budget</a>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="bi bi-moon-fill" id="theme-icon"></i>
+          </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Page Header -->
   <section class="page-header">
     <div class="container">
       <h1>🏨 Hotel Bookings</h1>
-      <p>All accommodations for 10 days, 7 hotels across South India</p>
+      <p class="text-muted mb-0">7 hotels • 9 nights • All booking details</p>
     </div>
   </section>
 
-  <!-- Content -->
   <section class="py-4">
     <div class="container">
 
       <!-- Summary Cards -->
-      <div class="summary-cards">
+      <div class="summary-grid">
         <div class="summary-card">
-          <div class="summary-card-value">7</div>
-          <div class="summary-card-label">Total Hotels</div>
+          <div class="summary-value">7</div>
+          <div class="summary-label">Hotels</div>
         </div>
         <div class="summary-card">
-          <div class="summary-card-value">9</div>
-          <div class="summary-card-label">Total Nights</div>
+          <div class="summary-value">9</div>
+          <div class="summary-label">Nights</div>
         </div>
-        <div class="summary-card paid">
-          <div class="summary-card-value">₹21,056</div>
-          <div class="summary-card-label">Already Paid</div>
+        <div class="summary-card success">
+          <div class="summary-value">₹21,056</div>
+          <div class="summary-label">Paid</div>
         </div>
-        <div class="summary-card unpaid">
-          <div class="summary-card-value">₹19,636</div>
-          <div class="summary-card-label">Pay at Property/Due</div>
+        <div class="summary-card warning">
+          <div class="summary-value">₹12,180</div>
+          <div class="summary-label">Pay at Hotel</div>
+        </div>
+        <div class="summary-card danger">
+          <div class="summary-value">₹7,456</div>
+          <div class="summary-label">Due (MMT)</div>
         </div>
       </div>
 
-      <!-- Alert for pending payment -->
-      <div class="alert-custom warning">
-        <i class="bi bi-exclamation-triangle" style="font-size: 1.5rem; color: var(--warning);"></i>
+      <!-- Alert -->
+      <div class="alert-custom">
+        <i class="bi bi-exclamation-triangle" style="font-size: 1.25rem; color: var(--danger);"></i>
         <div>
-          <strong>Payment Due!</strong> Pay ₹7,456 for Wayanad hotel on MakeMyTrip before <strong>Dec 30, 11:59 PM</strong> to avoid cancellation.
+          <strong>Payment Due!</strong> Pay ₹7,456 for Wayanad hotel on MakeMyTrip before <strong>Dec 30, 11:59 PM</strong>
         </div>
       </div>
 
@@ -382,14 +386,11 @@
       <div class="hotel-card cash">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Dec 25 – Dec 27 • 2 Nights</div>
+            <span class="hotel-dates">Dec 25 – Dec 27 • 2 Nights</span>
             <h3 class="hotel-name">Alps Residency</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              140 Big Car Street, Thiruparankundrum, Madurai 625005
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> 140 Big Car Street, Thiruparankundrum, Madurai 625005</div>
           </div>
-          <span class="badge-status badge-cash">💵 Pay at Property</span>
+          <span class="badge-cash">💵 Pay at Property</span>
         </div>
         <div class="hotel-body">
           <div class="hotel-grid">
@@ -411,21 +412,21 @@
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Total Cost</div>
-              <div class="hotel-detail-value" style="color: var(--warning);">₹6,090 (Cash)</div>
+              <div class="hotel-detail-value" style="color: #997404;">₹6,090 (Cash)</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Booking ID</div>
               <div class="hotel-detail-value">#6336054634</div>
             </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="not-included"><i class="bi bi-x-circle"></i> Breakfast not included</li>
-            <li class="included"><i class="bi bi-check-circle"></i> 24/7 food service available</li>
+          <ul class="checklist">
+            <li class="no"><i class="bi bi-x-circle"></i> Breakfast not included</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> 24/7 food service available</li>
           </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/search/?api=1&query=Alps+Residency+Thiruparankundram+Madurai" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
           <a href="tel:+916383766308" class="btn-custom btn-outline-custom">
             <i class="bi bi-telephone"></i> +91 63837 66308
@@ -437,14 +438,11 @@
       <div class="hotel-card paid">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Dec 27 – Dec 29 • 2 Nights</div>
+            <span class="hotel-dates">Dec 27 – Dec 29 • 2 Nights</span>
             <h3 class="hotel-name">Hotel Sridevi</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              Kanyakumari, Tamil Nadu
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> Kanyakumari, Tamil Nadu</div>
           </div>
-          <span class="badge-status badge-paid">✅ Paid</span>
+          <span class="badge-paid">✅ Paid</span>
         </div>
         <div class="hotel-body">
           <div class="hotel-grid">
@@ -473,14 +471,14 @@
               <div class="hotel-detail-value">#1958974936</div>
             </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="not-included"><i class="bi bi-x-circle"></i> Breakfast not included</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Free cancellation until Dec 25, 11:59 PM</li>
+          <ul class="checklist">
+            <li class="no"><i class="bi bi-x-circle"></i> Breakfast not included</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> Free cancellation until Dec 25</li>
           </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sridevi+Kanyakumari" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
           <a href="tel:+918903854444" class="btn-custom btn-outline-custom">
             <i class="bi bi-telephone"></i> +91 89038 54444
@@ -492,24 +490,21 @@
       <div class="hotel-card cash">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Dec 29 – Dec 30 • 1 Night</div>
+            <span class="hotel-dates">Dec 29 – Dec 30 • 1 Night</span>
             <h3 class="hotel-name">East West Beach Resorts</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              Varkala, Kerala
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> Varkala, Kerala</div>
           </div>
-          <span class="badge-status badge-cash">💵 Pay at Property</span>
+          <span class="badge-cash">💵 Pay at Property</span>
         </div>
         <div class="hotel-body">
           <div class="hotel-grid">
             <div class="hotel-detail">
               <div class="hotel-detail-label">Room Type</div>
-              <div class="hotel-detail-value">Deluxe Triple with Sea View (33 m²)</div>
+              <div class="hotel-detail-value">Deluxe Triple Sea View (33 m²)</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Amenities</div>
-              <div class="hotel-detail-value">Sea view, King bed + Futon, Parking</div>
+              <div class="hotel-detail-value">Sea view, King bed + Futon</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Check-in</div>
@@ -521,21 +516,17 @@
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Total Cost</div>
-              <div class="hotel-detail-value" style="color: var(--warning);">₹6,090 (Cash)</div>
+              <div class="hotel-detail-value" style="color: #997404;">₹6,090 (Cash)</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Booking ID</div>
               <div class="hotel-detail-value">#1959296018</div>
             </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="not-included"><i class="bi bi-x-circle"></i> Breakfast not included</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Free cancellation until Dec 27, 11:59 PM</li>
-          </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/search/?api=1&query=East+West+Beach+Resorts+Varkala" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
           <a href="tel:+917208780425" class="btn-custom btn-outline-custom">
             <i class="bi bi-telephone"></i> +91 72087 80425
@@ -547,24 +538,17 @@
       <div class="hotel-card paid">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Dec 30 – Dec 31 • 1 Night</div>
+            <span class="hotel-dates">Dec 30 – Dec 31 • 1 Night</span>
             <h3 class="hotel-name">D Fort Hotel Kollam</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              Thangassery Rd, near Lighthouse, Kollam 691007
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> Thangassery Rd, near Lighthouse, Kollam 691007</div>
           </div>
-          <span class="badge-status badge-paid">✅ Paid</span>
+          <span class="badge-paid">✅ Paid</span>
         </div>
         <div class="hotel-body">
           <div class="hotel-grid">
             <div class="hotel-detail">
               <div class="hotel-detail-label">Room Type</div>
               <div class="hotel-detail-value">Premium Double Room</div>
-            </div>
-            <div class="hotel-detail">
-              <div class="hotel-detail-label">Amenities</div>
-              <div class="hotel-detail-value">Near Lighthouse, City center</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Check-in</div>
@@ -578,20 +562,16 @@
               <div class="hotel-detail-label">Total Cost</div>
               <div class="hotel-detail-value" style="color: var(--success);">₹3,830 (Paid)</div>
             </div>
-            <div class="hotel-detail">
-              <div class="hotel-detail-label">Trip ID</div>
-              <div class="hotel-detail-value">#251204430586</div>
-            </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="included"><i class="bi bi-check-circle"></i> Breakfast included!</li>
-            <li class="included"><i class="bi bi-check-circle"></i> 15% off on Food & Beverages</li>
-            <li class="included"><i class="bi bi-check-circle"></i> 15% off Ayurvedic Treatment</li>
+          <ul class="checklist">
+            <li class="yes"><i class="bi bi-check-circle"></i> Breakfast included!</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> 15% off on Food & Beverages</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> 15% off Ayurvedic Treatment</li>
           </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/search/?api=1&query=D+Fort+Hotel+Kollam" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
           <a href="tel:+918658205079" class="btn-custom btn-outline-custom">
             <i class="bi bi-telephone"></i> +91 86582 05079
@@ -603,24 +583,17 @@
       <div class="hotel-card paid">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Dec 31 – Jan 1 • 1 Night</div>
+            <span class="hotel-dates">Dec 31 – Jan 1 • 1 Night</span>
             <h3 class="hotel-name">PMC Lakeshore Resort</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              Kainakary South, Alleppey, Kerala
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> Kainakary South, Alleppey, Kerala</div>
           </div>
-          <span class="badge-status badge-paid">✅ Paid</span>
+          <span class="badge-paid">✅ Paid</span>
         </div>
         <div class="hotel-body">
           <div class="hotel-grid">
             <div class="hotel-detail">
               <div class="hotel-detail-label">Room Type</div>
-              <div class="hotel-detail-value">Lakeview Deluxe Room (Ground Floor)</div>
-            </div>
-            <div class="hotel-detail">
-              <div class="hotel-detail-label">Amenities</div>
-              <div class="hotel-detail-value">Lake view, Backwater location</div>
+              <div class="hotel-detail-value">Lakeview Deluxe (Ground Floor)</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Check-in</div>
@@ -639,15 +612,13 @@
               <div class="hotel-detail-value">HMJP39YXBD</div>
             </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="not-included"><i class="bi bi-x-circle"></i> Breakfast not included</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Free cancellation until Dec 30, 1:00 PM</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Host operates houseboats & shikaras!</li>
+          <ul class="checklist">
+            <li class="yes"><i class="bi bi-check-circle"></i> Host operates houseboats & shikaras!</li>
           </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/place/9%C2%B029'14.7%22N+76%C2%B022'45.3%22E" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
         </div>
       </div>
@@ -656,30 +627,21 @@
       <div class="hotel-card unpaid">
         <div class="hotel-header">
           <div>
-            <div class="hotel-dates">Jan 1 – Jan 3 • 2 Nights</div>
+            <span class="hotel-dates">Jan 1 – Jan 3 • 2 Nights</span>
             <h3 class="hotel-name">Holidays Garden Resort</h3>
-            <div class="hotel-location">
-              <i class="bi bi-geo-alt"></i>
-              Building No.10-362/2, Key Yem Holidays, Kalpetta, Wayanad 673121
-            </div>
+            <div class="hotel-location"><i class="bi bi-geo-alt"></i> Building No.10-362/2, Kalpetta, Wayanad 673121</div>
           </div>
-          <span class="badge-status badge-unpaid">⚠️ Payment Due</span>
+          <span class="badge-unpaid">⚠️ Payment Due</span>
         </div>
         <div class="hotel-body">
-          <div class="alert-custom warning mb-3">
+          <div class="alert-custom" style="margin-bottom: 1rem;">
             <i class="bi bi-exclamation-triangle"></i>
-            <div>
-              <strong>Action Required!</strong> Pay ₹7,456 on MakeMyTrip before <strong>Dec 30, 11:59 PM</strong> to avoid auto-cancellation.
-            </div>
+            <div>Pay <strong>₹7,456</strong> on MakeMyTrip before <strong>Dec 30, 11:59 PM</strong></div>
           </div>
           <div class="hotel-grid">
             <div class="hotel-detail">
               <div class="hotel-detail-label">Room Type</div>
-              <div class="hotel-detail-value">Luxury Executive AC (King Bed)</div>
-            </div>
-            <div class="hotel-detail">
-              <div class="hotel-detail-label">Amenities</div>
-              <div class="hotel-detail-value">TV, 27+ amenities</div>
+              <div class="hotel-detail-value">Luxury Executive AC</div>
             </div>
             <div class="hotel-detail">
               <div class="hotel-detail-label">Check-in</div>
@@ -698,15 +660,15 @@
               <div class="hotel-detail-value">NH26131448531952</div>
             </div>
           </div>
-          <ul class="checklist mt-3">
-            <li class="not-included"><i class="bi bi-x-circle"></i> No meals included (pay at hotel)</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Couple friendly</li>
-            <li class="included"><i class="bi bi-check-circle"></i> Outside food & non-veg allowed</li>
+          <ul class="checklist">
+            <li class="no"><i class="bi bi-x-circle"></i> No meals included</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> Couple friendly</li>
+            <li class="yes"><i class="bi bi-check-circle"></i> Outside food & non-veg allowed</li>
           </ul>
         </div>
         <div class="hotel-footer">
           <a href="https://www.google.com/maps/search/?api=1&query=Holidays+Garden+Resort+Kalpetta+Wayanad" target="_blank" class="btn-custom btn-primary-custom">
-            <i class="bi bi-geo-alt"></i> View on Map
+            <i class="bi bi-geo-alt"></i> View Map
           </a>
           <a href="tel:+917034208484" class="btn-custom btn-outline-custom">
             <i class="bi bi-telephone"></i> +91 70342 08484
@@ -718,101 +680,96 @@
       </div>
 
       <!-- Summary Table -->
-      <div class="hotel-card" style="border-left: none;">
-        <div class="hotel-header">
-          <h3 class="hotel-name">📊 Accommodation Summary</h3>
-        </div>
-        <div class="hotel-body">
-          <div class="table-responsive">
-            <table class="table table-dark table-hover" style="background: transparent;">
-              <thead>
-                <tr>
-                  <th>Location</th>
-                  <th>Hotel</th>
-                  <th>Nights</th>
-                  <th>Cost</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Madurai</td>
-                  <td>Alps Residency</td>
-                  <td>2</td>
-                  <td>₹6,090</td>
-                  <td><span class="badge-status badge-cash">Cash</span></td>
-                </tr>
-                <tr>
-                  <td>Kanyakumari</td>
-                  <td>Hotel Sridevi</td>
-                  <td>2</td>
-                  <td>₹7,903</td>
-                  <td><span class="badge-status badge-paid">Paid</span></td>
-                </tr>
-                <tr>
-                  <td>Varkala</td>
-                  <td>East West Beach Resorts</td>
-                  <td>1</td>
-                  <td>₹6,090</td>
-                  <td><span class="badge-status badge-cash">Cash</span></td>
-                </tr>
-                <tr>
-                  <td>Kollam</td>
-                  <td>D Fort Hotel</td>
-                  <td>1</td>
-                  <td>₹3,830</td>
-                  <td><span class="badge-status badge-paid">Paid</span></td>
-                </tr>
-                <tr>
-                  <td>Alleppey</td>
-                  <td>PMC Lakeshore</td>
-                  <td>1</td>
-                  <td>₹5,250</td>
-                  <td><span class="badge-status badge-paid">Paid</span></td>
-                </tr>
-                <tr>
-                  <td>Wayanad</td>
-                  <td>Holidays Garden</td>
-                  <td>2</td>
-                  <td>₹7,456</td>
-                  <td><span class="badge-status badge-unpaid">Due</span></td>
-                </tr>
-                <tr style="font-weight: 600; border-top: 2px solid var(--border);">
-                  <td colspan="2">TOTAL</td>
-                  <td>9 nights</td>
-                  <td>₹36,619</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div class="table-custom mt-4">
+        <table>
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Hotel</th>
+              <th>Nights</th>
+              <th>Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Madurai</td>
+              <td>Alps Residency</td>
+              <td>2</td>
+              <td>₹6,090</td>
+              <td><span class="badge-cash">Cash</span></td>
+            </tr>
+            <tr>
+              <td>Kanyakumari</td>
+              <td>Hotel Sridevi</td>
+              <td>2</td>
+              <td>₹7,903</td>
+              <td><span class="badge-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td>Varkala</td>
+              <td>East West Beach</td>
+              <td>1</td>
+              <td>₹6,090</td>
+              <td><span class="badge-cash">Cash</span></td>
+            </tr>
+            <tr>
+              <td>Kollam</td>
+              <td>D Fort Hotel</td>
+              <td>1</td>
+              <td>₹3,830</td>
+              <td><span class="badge-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td>Alleppey</td>
+              <td>PMC Lakeshore</td>
+              <td>1</td>
+              <td>₹5,250</td>
+              <td><span class="badge-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td>Wayanad</td>
+              <td>Holidays Garden</td>
+              <td>2</td>
+              <td>₹7,456</td>
+              <td><span class="badge-unpaid">Due</span></td>
+            </tr>
+            <tr class="total">
+              <td colspan="2"><strong>TOTAL</strong></td>
+              <td><strong>9</strong></td>
+              <td><strong>₹36,619</strong></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h5 class="footer-title">South India Road Trip 2026</h5>
-          <p class="footer-text">7 hotels • 9 nights • ₹36,619 total accommodation</p>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <h5 class="footer-title">Quick Links</h5>
-          <p class="footer-text">
-            <a href="index.html">Itinerary</a> • 
-            <a href="hotels.html">Hotels</a> • 
-            <a href="budget.html">Budget</a>
-          </p>
-        </div>
-      </div>
+      <p class="mb-0"><strong>South India Road Trip 2026</strong> • 7 hotels • 9 nights • ₹36,619 total</p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.className = 'bi bi-sun-fill';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.className = 'bi bi-moon-fill';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+  </script>
 </body>
 </html>
-

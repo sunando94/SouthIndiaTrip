@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day-by-Day Details — South India Road Trip 2026</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --card: #ffffff;
+      --border: #e9ecef;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --accent: #0d6efd;
+      --accent-soft: rgba(13, 110, 253, 0.1);
+      --success: #198754;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-soft: rgba(88, 166, 255, 0.1);
+      --shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    .navbar-custom {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text) !important;
+    }
+    
+    .nav-link-custom {
+      color: var(--text-muted) !important;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      border-radius: 8px;
+    }
+    
+    .nav-link-custom:hover, .nav-link-custom.active {
+      color: var(--text) !important;
+      background: var(--bg-secondary);
+    }
+    
+    .theme-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    
+    .page-header {
+      padding: 2rem 0;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .page-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+    
+    /* Day Section */
+    .day-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .day-number {
+      background: var(--accent);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    
+    .day-info h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .day-meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-bottom: 1.25rem;
+    }
+    
+    .timeline-item:last-child { padding-bottom: 0; }
+    
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 0.2rem;
+      width: 16px;
+      height: 16px;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .timeline-dot.food { border-color: #fd7e14; }
+    .timeline-dot.stay { border-color: #198754; }
+    .timeline-dot.drive { border-color: #0d6efd; }
+    
+    .timeline-time {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .timeline-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Hotel Card */
+    .hotel-card {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .hotel-card.paid { border-left: 4px solid var(--success); }
+    .hotel-card.cash { border-left: 4px solid var(--warning); }
+    .hotel-card.unpaid { border-left: 4px solid var(--danger); }
+    
+    .hotel-name {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .hotel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+    
+    .hotel-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+    }
+    
+    .hotel-item i { color: var(--accent); }
+    
+    .badge-paid { background: rgba(25,135,84,0.1); color: var(--success); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .badge-cash { background: rgba(255,193,7,0.2); color: #997404; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .badge-unpaid { background: rgba(220,53,69,0.1); color: var(--danger); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    
+    .btn-custom {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    
+    .btn-custom:hover { text-decoration: none; opacity: 0.8; }
+    
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar-custom">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <a href="index.html" class="nav-brand">🗺️ South India Trip</a>
+        <div class="d-flex align-items-center gap-2">
+          <a href="index.html" class="nav-link-custom">Overview</a>
+          <a href="days.html" class="nav-link-custom active">Days</a>
+          <a href="hotels.html" class="nav-link-custom">Hotels</a>
+          <a href="budget.html" class="nav-link-custom">Budget</a>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="bi bi-moon-fill" id="theme-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>📅 Day-by-Day Itinerary</h1>
+      <p class="text-muted mb-0">Complete detailed timeline for all 10 days</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- Day 1 -->
+    <section class="day-section" id="day1">
+      <div class="day-header">
+        <div class="day-number">1</div>
+        <div class="day-info">
+          <h2>Bangalore → Madurai</h2>
+          <div class="day-meta">🎄 Dec 25 (Thu) • Christmas Road Trip! • 435 km • 7-8 hrs</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">3:00 – 4:00 AM</div>
+          <div class="timeline-title">🌙 Depart Bangalore</div>
+          <div class="timeline-desc">Route: Bangalore → Hosur → Krishnagiri → Dharmapuri → Salem → Dindigul → Madurai<br><a href="https://www.google.com/maps/dir/Bangalore/Madurai" target="_blank">📍 View Route (NH44 & NH38)</a></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">6:30 AM</div>
+          <div class="timeline-title">☕ Breakfast at Krishnagiri</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=A2B+Adyar+Ananda+Bhavan+Krishnagiri" target="_blank">A2B (Adyar Ananda Bhavan)</a> — ~90 km from Bangalore, opens early, great idli-dosa-filter coffee</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">Optional</div>
+          <div class="timeline-title">📍 En Route Stops</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hogenakkal+Falls" target="_blank">Hogenakkal Falls</a> — "Niagara of India" (30 min detour)<br><a href="https://www.google.com/maps/search/?api=1&query=Dindigul+Rock+Fort" target="_blank">Dindigul Rock Fort</a> — Quick 30-min stop</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">11:30 AM</div>
+          <div class="timeline-title">🍽️ Lunch at Dindigul</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Dindigul+Thalappakatti+Biryani+Dindigul" target="_blank">Dindigul Thalappakatti Biryani</a> — Legendary birthplace of Thalappakatti!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">12:00 – 1:00 PM</div>
+          <div class="timeline-title">🏨 Check-in Alps Residency</div>
+          <div class="timeline-desc">Standard King Room • Pool view, AC, TV, WiFi</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">Afternoon</div>
+          <div class="timeline-title">🌙 Rest Day</div>
+          <div class="timeline-desc">Relax after long drive. 24/7 food service available. <strong>Early sleep — big day tomorrow!</strong></div>
+        </div>
+      </div>
+      <div class="hotel-card cash">
+        <div class="hotel-name">🏨 Alps Residency <span class="badge-cash">💵 Pay ₹6,090 Cash</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Dec 25-27 (2 nights)</div>
+          <div class="hotel-item"><i class="bi bi-telephone"></i> <a href="tel:+916383766308">+91 63837 66308</a></div>
+          <div class="hotel-item"><i class="bi bi-geo-alt"></i> <a href="https://www.google.com/maps/search/?api=1&query=Alps+Residency+Thiruparankundram+Madurai" target="_blank">View Map</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 2 -->
+    <section class="day-section" id="day2">
+      <div class="day-header">
+        <div class="day-number">2</div>
+        <div class="day-info">
+          <h2>Madurai Sightseeing</h2>
+          <div class="day-meta">🛕 Dec 26 (Fri) • Full day exploring ancient temple city</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">☕ Breakfast</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Murugan+Idli+Shop+Madurai" target="_blank">Murugan Idli Shop</a> ⭐ 4.4 — Legendary soft idlis with podi & ghee</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">🛕 Meenakshi Amman Temple</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Meenakshi+Amman+Temple+Madurai" target="_blank">Meenakshi Temple</a> — Open 5 AM–12:30 PM & 4 PM–10 PM. Spend 2-3 hours exploring stunning gopurams</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">11:30 AM</div>
+          <div class="timeline-title">🏛️ Thirumalai Nayak Palace</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Thirumalai+Nayak+Palace+Madurai" target="_blank">Nayak Palace</a> — 17th-century Indo-Saracenic beauty. Sound & Light show at 6:45 PM</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Amma+Mess+Madurai" target="_blank">Amma Mess</a> ⭐ 4.3 — Chettinad chicken & mutton<br><a href="https://www.google.com/maps/search/?api=1&query=Kumar+Mess+Madurai" target="_blank">Kumar Mess</a> ⭐ 4.2 — Famous mutton chops</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">3:30 PM</div>
+          <div class="timeline-title">💧 Teppakulam Tank & Gandhi Museum</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Vandiyur+Mariamman+Teppakulam+Madurai" target="_blank">Teppakulam</a> — Beautiful temple tank | <a href="https://www.google.com/maps/search/?api=1&query=Gandhi+Memorial+Museum+Madurai" target="_blank">Gandhi Museum</a> — Free entry</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">6:00 PM</div>
+          <div class="timeline-title">🌅 Evening at Temple</div>
+          <div class="timeline-desc">Return for evening aarti (beautiful lighting!) • Explore bustling temple streets</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">8:00 PM</div>
+          <div class="timeline-title">🍽️ Dinner (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Apollo+Restaurant+Madurai" target="_blank">Apollo Restaurant</a> ⭐ 4.3 — Biryanis & tandoori</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">9:30 PM</div>
+          <div class="timeline-title">🌙 Return to Hotel</div>
+          <div class="timeline-desc"><strong>Early night — tomorrow's epic day starts at 4:30 AM!</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 3 -->
+    <section class="day-section" id="day3">
+      <div class="day-header">
+        <div class="day-number">3</div>
+        <div class="day-info">
+          <h2>Madurai → Rameshwaram → Kanyakumari</h2>
+          <div class="day-meta">⭐ Dec 27 (Sat) • EPIC DAY! Sunrise at Dhanushkodi • Sunset at Kanyakumari • 470 km</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">4:30 AM</div>
+          <div class="timeline-title">🌙 Checkout & Depart Madurai</div>
+          <div class="timeline-desc">Pay ₹6,090 cash at Alps Residency. Drive to Dhanushkodi (~170 km, ~3 hrs) via Pamban Bridge</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">6:15 AM</div>
+          <div class="timeline-title">🌅 Sunrise at Dhanushkodi</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Dhanushkodi+Beach+Rameshwaram" target="_blank">Dhanushkodi Beach</a> — India's ghost town, where Bay of Bengal meets Indian Ocean. Photo stop at Pamban Bridge!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">8:30 AM</div>
+          <div class="timeline-title">🛕 Ramanathaswamy Temple</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Ramanathaswamy+Temple+Rameshwaram" target="_blank">One of 12 Jyotirlingas</a> — Famous 1000-pillar corridor | <a href="https://www.google.com/maps/search/?api=1&query=Agni+Theertham+Rameshwaram" target="_blank">Agni Theertham</a></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">10:30 AM</div>
+          <div class="timeline-title">🍽️ Brunch in Rameshwaram</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Ahaan+Restaurant+Rameshwaram" target="_blank">Ahaan Restaurant</a> — Non-veg & seafood</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">12:00 PM</div>
+          <div class="timeline-title">🚗 Drive to Kanyakumari</div>
+          <div class="timeline-desc">Route: Rameshwaram → Ramanathapuram → Tirunelveli → Kanyakumari (~300 km, 5–6 hrs)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🍽️ Lunch at Tirunelveli</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Aryaas+Tirunelveli" target="_blank">Hotel Aryaas</a> ⭐ 4.2 | 🍫 <a href="https://www.google.com/maps/search/?api=1&query=Iruttu+Kadai+Halwa+Tirunelveli" target="_blank">Iruttu Kadai Halwa</a> — MUST BUY!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">6:00 PM</div>
+          <div class="timeline-title">🏨 Check-in Hotel Sridevi</div>
+          <div class="timeline-desc">Standard Room (25 m², Parking, Express check-in)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">6:10 PM</div>
+          <div class="timeline-title">🌅 Sunset at Kanyakumari</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Sunset+View+Point+Kanyakumari" target="_blank">Sunset View Point</a> — Watch sun set into Arabian Sea!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Saravana+Kanyakumari" target="_blank">Hotel Saravana</a> ⭐ 4.1 — South Indian near beach</div>
+        </div>
+      </div>
+      <div class="hotel-card paid">
+        <div class="hotel-name">🏨 Hotel Sridevi <span class="badge-paid">✅ ₹7,903 Paid</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Dec 27-29 (2 nights)</div>
+          <div class="hotel-item"><i class="bi bi-telephone"></i> <a href="tel:+918903854444">+91 89038 54444</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 4 -->
+    <section class="day-section" id="day4">
+      <div class="day-header">
+        <div class="day-number">4</div>
+        <div class="day-info">
+          <h2>Kanyakumari Full Day</h2>
+          <div class="day-meta">🌊 Dec 28 (Sun) • Sunrise ~6:20 AM • India's southern tip</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:45 AM</div>
+          <div class="timeline-title">🌅 Sunrise at Triveni Sangam</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Triveni+Sangam+Kanyakumari" target="_blank">Triveni Sangam</a> — Where 3 seas meet!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">☕ Breakfast</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sangam+Kanyakumari" target="_blank">Hotel Sangam</a> ⭐ 4.2 — Non-veg available</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">🪨 Vivekananda Rock Memorial</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Vivekananda+Rock+Memorial+Kanyakumari" target="_blank">Ferry ₹50/person</a> — Go early to avoid crowds!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">9:30 AM</div>
+          <div class="timeline-title">🗿 Thiruvalluvar Statue</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Thiruvalluvar+Statue+Kanyakumari" target="_blank">133-ft tall statue</a> — Same ferry ticket</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">10:30 AM</div>
+          <div class="timeline-title">🛕 Kumari Amman Temple</div>
+          <div class="timeline-desc">Ancient temple (no cameras/phones inside)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">12:00 PM</div>
+          <div class="timeline-title">🏛️ Gandhi Memorial</div>
+          <div class="timeline-desc">Where Gandhi's ashes were kept</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sea+View+Kanyakumari" target="_blank">Hotel Sea View</a> ⭐ 4.3 — Excellent seafood</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🏰 Padmanabhapuram Palace</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Padmanabhapuram+Palace" target="_blank">30 km away</a> — 16th-century wooden palace (Closed Mondays!)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">6:00 PM</div>
+          <div class="timeline-title">🌅 Sunset at View Tower</div>
+          <div class="timeline-desc">360° views of all 3 seas</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Tamil+Nadu+TTDC+Kanyakumari" target="_blank">Hotel Tamil Nadu</a> ⭐ 4.1 — Seafood, prawns, fish fry</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 5 -->
+    <section class="day-section" id="day5">
+      <div class="day-header">
+        <div class="day-number">5</div>
+        <div class="day-info">
+          <h2>Kanyakumari → Varkala</h2>
+          <div class="day-meta">🏖️ Dec 29 (Mon) • Cliffs, Beach & Sunset • 145 km • 3.5 hrs</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">🌅 Optional Sunrise</div>
+          <div class="timeline-desc">Catch one last sunrise at Triveni Sangam</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">☕ Breakfast</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Sangam+Kanyakumari" target="_blank">Hotel Sangam</a></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">11:00 AM</div>
+          <div class="timeline-title">🚗 Checkout & Depart</div>
+          <div class="timeline-desc">Route: Kanyakumari → Nagercoil → Trivandrum → Varkala</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch at Trivandrum</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Zam+Zam+Restaurant+Trivandrum" target="_blank">Zam Zam</a> ⭐ 4.3 — Famous Malabar biryani</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🏨 Check-in East West Beach Resorts</div>
+          <div class="timeline-desc">Deluxe Triple with Sea View (33 m²)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">3:30 PM</div>
+          <div class="timeline-title">🏖️ Varkala Sightseeing</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Varkala+Cliff" target="_blank">Varkala Cliff</a> — Red laterite cliffs with cafés<br><a href="https://www.google.com/maps/search/?api=1&query=Papanasam+Beach+Varkala" target="_blank">Papanasam Beach</a> — Sacred beach, great for swimming<br><a href="https://www.google.com/maps/search/?api=1&query=Janardhana+Swamy+Temple+Varkala" target="_blank">Janardhana Swamy Temple</a> — 2000-year-old Vishnu temple</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:45 PM</div>
+          <div class="timeline-title">🌅 Sunset at Varkala Cliff</div>
+          <div class="timeline-desc">Watch stunning sunset from cliff-top cafés</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner (Cliff Cafés)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Clafouti+Varkala" target="_blank">Clafouti</a> ⭐ 4.4 — French-Kerala fusion, great seafood</div>
+        </div>
+      </div>
+      <div class="hotel-card cash">
+        <div class="hotel-name">🏨 East West Beach Resorts <span class="badge-cash">💵 Pay ₹6,090 Cash</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Dec 29-30 (1 night)</div>
+          <div class="hotel-item"><i class="bi bi-telephone"></i> <a href="tel:+917208780425">+91 72087 80425</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 6 -->
+    <section class="day-section" id="day6">
+      <div class="day-header">
+        <div class="day-number">6</div>
+        <div class="day-info">
+          <h2>Varkala → Kollam</h2>
+          <div class="day-meta">⛵ Dec 30 (Tue) • Backwaters & Lighthouse • 35 km • 1 hr</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">6:30 AM</div>
+          <div class="timeline-title">🌅 Sunrise at Varkala Beach</div>
+          <div class="timeline-desc">Early morning walk on Papanasam Beach</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">☕ Breakfast at Resort</div>
+          <div class="timeline-desc">Enjoy breakfast before checkout</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">11:00 AM</div>
+          <div class="timeline-title">🚗 Checkout & Drive to Kollam</div>
+          <div class="timeline-desc">Short scenic drive along the coast (~35 km, 1 hr)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">12:30 PM</div>
+          <div class="timeline-title">🍽️ Lunch (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Fayalwan+Hotel+Kollam" target="_blank">Fayalwan Hotel</a> ⭐ 4.3 — Famous Malabar biryani & seafood</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">2:00 PM</div>
+          <div class="timeline-title">🏨 Check-in D Fort Hotel</div>
+          <div class="timeline-desc">Premium Double Room • ✨ Includes: Breakfast, 15% off F&B, 15% off Ayurvedic treatment!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">3:30 PM</div>
+          <div class="timeline-title">🏖️ Kollam Sightseeing</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Thangassery+Lighthouse+Kollam" target="_blank">Thangassery Lighthouse</a> — Near your hotel!<br><a href="https://www.google.com/maps/search/?api=1&query=Ashtamudi+Lake+Kollam" target="_blank">Ashtamudi Lake</a> — Kerala's 2nd largest lake</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:30 PM</div>
+          <div class="timeline-title">🌅 Sunset Boat Ride</div>
+          <div class="timeline-desc">Short boat ride on Ashtamudi Lake for sunset views</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner</div>
+          <div class="timeline-desc">🎁 Use 15% off F&B at hotel restaurant!</div>
+        </div>
+      </div>
+      <div class="hotel-card paid">
+        <div class="hotel-name">🏨 D Fort Hotel Kollam <span class="badge-paid">✅ ₹3,830 Paid</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Dec 30-31 (1 night)</div>
+          <div class="hotel-item"><i class="bi bi-egg-fried"></i> Breakfast included!</div>
+          <div class="hotel-item"><i class="bi bi-telephone"></i> <a href="tel:+918658205079">+91 86582 05079</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 7 -->
+    <section class="day-section" id="day7">
+      <div class="day-header">
+        <div class="day-number">7</div>
+        <div class="day-info">
+          <h2>Kollam → Jatayu → Alleppey</h2>
+          <div class="day-meta">🎆 Dec 31 (Wed) • NYE at Backwaters! • 110 km • 3.5 hrs</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 AM</div>
+          <div class="timeline-title">☕ Breakfast at Hotel</div>
+          <div class="timeline-desc">Enjoy included breakfast</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">8:30 AM</div>
+          <div class="timeline-title">🚗 Early Checkout & Depart</div>
+          <div class="timeline-desc">Head to Jatayu Earth's Center (~45 km, 1 hr)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">9:30 AM</div>
+          <div class="timeline-title">🦅 Jatayu Earth's Center</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Jatayu+Earths+Center" target="_blank">World's largest bird sculpture (200 ft)!</a><br>Opens 10 AM, ₹750/person (cable car + entry)<br>Adventure activities available. Spend ~2 hours here</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">12:00 PM</div>
+          <div class="timeline-title">🚗 Drive to Alleppey</div>
+          <div class="timeline-desc">Jatayu to Alleppey: ~65 km, ~1.5 hrs</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">1:30 PM</div>
+          <div class="timeline-title">🏨 Check-in PMC Lakeshore Resort</div>
+          <div class="timeline-desc">Lakeview Deluxe Room • Host operates houseboats & shikaras!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🍽️ Late Lunch</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Harbour+Restaurant+Alleppey" target="_blank">Harbour Restaurant</a> ⭐ 4.3 — Seafood & Kerala meals</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">4:00 PM</div>
+          <div class="timeline-title">🛶 Shikara Boat Ride</div>
+          <div class="timeline-desc">Ask your host! ~₹500-800/hr. Punnamada Lake — Snake Boat Race venue</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:30 PM</div>
+          <div class="timeline-title">🌅 Sunset Shikara Ride</div>
+          <div class="timeline-desc">Magical sunset on the backwaters!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">8:00 PM</div>
+          <div class="timeline-title">🍽️ NYE Dinner</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Dreamers+Cafe+Alleppey" target="_blank">Dreamers Café</a> ⭐ 4.4 — Great ambiance for NYE</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">11:59 PM</div>
+          <div class="timeline-title">🎆 HAPPY NEW YEAR 2026!</div>
+          <div class="timeline-desc">Ring in the new year at serene Kerala backwaters! 🥂</div>
+        </div>
+      </div>
+      <div class="hotel-card paid">
+        <div class="hotel-name">🏨 PMC Lakeshore Resort <span class="badge-paid">✅ ₹5,250 Paid</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Dec 31 - Jan 1 (1 night)</div>
+          <div class="hotel-item"><i class="bi bi-boat"></i> Host has boats!</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 8 -->
+    <section class="day-section" id="day8">
+      <div class="day-header">
+        <div class="day-number">8</div>
+        <div class="day-info">
+          <h2>Alleppey → Wayanad</h2>
+          <div class="day-meta">🎉 Jan 1 (Thu) • New Year! Long drive to hills • 280 km • 6-7 hrs</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">☕ New Year Breakfast</div>
+          <div class="timeline-desc">Ask PMC Lakeshore or nearby cafés</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">🚗 Checkout & Long Drive</div>
+          <div class="timeline-desc">Route: Alleppey → Kottayam → Kozhikode → Kalpetta (~280 km, 6-7 hrs)<br>Scenic drive through Western Ghats with hairpin bends!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">12:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch at Kozhikode</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Paragon+Restaurant+Kozhikode" target="_blank">Paragon Restaurant</a> ⭐ 4.5 — Legendary Malabar biryani & seafood!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🏨 Check-in Holidays Garden Resort</div>
+          <div class="timeline-desc">Luxury Executive AC • 2 nights • No meals included</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">4:00 PM</div>
+          <div class="timeline-title">🌿 Rest & Freshen Up</div>
+          <div class="timeline-desc">Relax after long drive. Enjoy the hill station weather!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:30 PM</div>
+          <div class="timeline-title">🌅 Sunset at Lakkidi View Point</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Lakkidi+View+Point+Wayanad" target="_blank">Lakkidi View Point</a> — Gateway to Wayanad, stunning valley views</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner in Kalpetta</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=1980s+Restaurant+Kalpetta" target="_blank">1980's Restaurant</a> ⭐ 4.3 — Great ambiance, multi-cuisine</div>
+        </div>
+      </div>
+      <div class="hotel-card unpaid">
+        <div class="hotel-name">🏨 Holidays Garden Resort <span class="badge-unpaid">⚠️ Pay ₹7,456 by Dec 30</span></div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><i class="bi bi-calendar"></i> Jan 1-3 (2 nights)</div>
+          <div class="hotel-item"><i class="bi bi-telephone"></i> <a href="tel:+917034208484">+91 70342 08484</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 9 -->
+    <section class="day-section" id="day9">
+      <div class="day-header">
+        <div class="day-number">9</div>
+        <div class="day-info">
+          <h2>Wayanad Full Day</h2>
+          <div class="day-meta">🏔️ Jan 2 (Fri) • Caves, Waterfalls, Dams & Lakes</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">☕ Breakfast</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Vrindavan+Kalpetta" target="_blank">Hotel Vrindavan</a> ⭐ 4.2 — South Indian breakfast</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">8:30 AM</div>
+          <div class="timeline-title">🗿 Edakkal Caves</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Edakkal+Caves+Wayanad" target="_blank">Ancient petroglyphs (6000 BC!)</a> — Opens 9:30 AM, Entry ₹30, 30-min trek uphill</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">11:00 AM</div>
+          <div class="timeline-title">🌊 Soochipara Waterfalls</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Soochipara+Falls+Wayanad" target="_blank">200m three-tiered waterfall</a> — Entry ₹40, swimming allowed</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Chillies+Restaurant+Wayanad" target="_blank">Chillies Restaurant</a> ⭐ 4.2 — Biryani & Chinese</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">2:30 PM</div>
+          <div class="timeline-title">🏔️ Banasura Sagar Dam</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Banasura+Sagar+Dam+Wayanad" target="_blank">India's largest earth dam!</a> — Speed boating ~₹500-700</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">4:00 PM</div>
+          <div class="timeline-title">🌊 Pookode Lake</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Pookode+Lake+Wayanad" target="_blank">Serene freshwater lake</a> — Pedal boating ~₹100</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">5:30 PM</div>
+          <div class="timeline-title">🌅 Neelimala View Point</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Neelimala+View+Point+Wayanad" target="_blank">Panoramic views</a> — Can see Meenmutty Falls</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">7:30 PM</div>
+          <div class="timeline-title">🍽️ Dinner</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=1980s+Restaurant+Kalpetta" target="_blank">1980's Restaurant</a> — Last dinner in Wayanad</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 10 -->
+    <section class="day-section" id="day10">
+      <div class="day-header">
+        <div class="day-number" style="background: #198754;">10</div>
+        <div class="day-info">
+          <h2>Wayanad → Mysore → Bangalore</h2>
+          <div class="day-meta">🏁 Jan 3 (Sat) • Final Day! Trip Complete!</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-title">🚗 Checkout & Depart</div>
+          <div class="timeline-desc">Route: Kalpetta → Sultan Bathery → Bandipur Forest → Mysore (~120 km, 3 hrs)<br>⚠️ Bandipur gates: 6 AM - 9 PM (no night driving)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-title">☕ Breakfast on the Way</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Kamat+Restaurant+Gundlupet" target="_blank">Kamat Restaurant, Gundlupet</a> ⭐ 4.1</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">10:30 AM</div>
+          <div class="timeline-title">🏛️ Mysore Palace</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Mysore+Palace" target="_blank">Grand Indo-Saracenic palace</a> — Entry ₹70</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot food"></div>
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">🍽️ Lunch (Non-Veg)</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+RRR+Mysore" target="_blank">Hotel RRR</a> ⭐ 4.4 — Legendary Mysore biryani!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">3:00 PM</div>
+          <div class="timeline-title">🏰 Srirangapatna</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Srirangapatna+Fort" target="_blank">Tipu Sultan's fortress</a> — Daria Daulat Bagh, Gumbaz (~45 mins)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">4:00 PM</div>
+          <div class="timeline-title">🦅 Ranganathittu Bird Sanctuary</div>
+          <div class="timeline-desc"><a href="https://www.google.com/maps/search/?api=1&query=Ranganathittu+Bird+Sanctuary" target="_blank">Boat ride ~₹50</a> — Spot storks, herons, crocodiles! Closes 6 PM</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot drive"></div>
+          <div class="timeline-time">5:15 PM</div>
+          <div class="timeline-title">🚗 Drive to Bangalore</div>
+          <div class="timeline-desc">~120 km via Expressway (~2.5 hrs) • ☕ Stop for filter coffee!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot stay"></div>
+          <div class="timeline-time">7:45 – 8:30 PM</div>
+          <div class="timeline-title">🏠 Arrive Bangalore</div>
+          <div class="timeline-desc"><strong>🎉 Welcome home! Trip complete! 10 days, ~2000 km, countless memories!</strong></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="mb-0"><strong>South India Road Trip 2026</strong> • 10 Days • 2000+ km • Made with ❤️</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.className = 'bi bi-sun-fill';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.className = 'bi bi-moon-fill';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+  </script>
+</body>
+</html>
+
