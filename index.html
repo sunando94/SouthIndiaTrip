@@ -323,7 +323,7 @@
       <div id="detailed" class="tab-content">
         
         <!-- Day 1 Detail -->
-        <div class="detail-card">
+        <div class="detail-card" id="day1">
           <div class="detail-header">
             <div>
               <span class="detail-date">Day 1 • Dec 25</span>
@@ -377,7 +377,7 @@
         </div>
 
         <!-- Day 2 Detail -->
-        <div class="detail-card">
+        <div class="detail-card" id="day2">
           <div class="detail-header">
             <div>
               <span class="detail-date">Day 2 • Dec 26</span>
@@ -428,7 +428,7 @@
         </div>
 
         <!-- Day 3 Detail -->
-        <div class="detail-card">
+        <div class="detail-card" id="day3">
           <div class="detail-header">
             <div>
               <span class="detail-date">Day 3 • Dec 27</span>
@@ -538,17 +538,40 @@
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       
       document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
+      
+      // Find and activate the corresponding button
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
     }
     
     // Open day detail
     function openDay(dayNum) {
-      showTab('detailed');
-      document.querySelector('[onclick="showTab(\'detailed\')"]').classList.add('active');
-      document.querySelector('[onclick="showTab(\'overview\')"]').classList.remove('active');
-      
-      // Scroll to top of detailed section
-      document.getElementById('detailed').scrollIntoView({ behavior: 'smooth' });
+      // Days 1-3 are in the detailed tab, days 4-10 are in days.html
+      if (dayNum <= 3) {
+        // Switch to detailed tab
+        showTab('detailed');
+        
+        // Scroll to the specific day after a short delay to ensure tab is visible
+        setTimeout(() => {
+          const dayElement = document.getElementById('day' + dayNum);
+          if (dayElement) {
+            dayElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Add a highlight effect
+            dayElement.style.transition = 'box-shadow 0.3s';
+            dayElement.style.boxShadow = '0 0 0 4px rgba(13, 110, 253, 0.3)';
+            setTimeout(() => {
+              dayElement.style.boxShadow = '';
+            }, 2000);
+          }
+        }, 100);
+      } else {
+        // Days 4-10: redirect to days.html
+        window.location.href = 'days.html#day' + dayNum;
+      }
     }
     
     // Hero Carousel
