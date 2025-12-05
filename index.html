@@ -10,10 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  
-  <style>
-    :root {
-      --bg: #ffffff;
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
       --bg-secondary: #f8f9fa;
       --card: #ffffff;
       --border: #e9ecef;
@@ -563,11 +564,8 @@
       border-radius: 8px;
       cursor: pointer;
       color: var(--text);
-      font-size: 1.25rem;
-    }
-  </style>
-</head>
-<body>
+
+  <!-- Navbar -->
 
   <!-- Navbar -->
   <nav class="navbar-custom">
@@ -588,9 +586,24 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
+  <!-- Full Screen Hero with Carousel -->
+  <section class="hero-fullscreen">
+    <div class="hero-carousel">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1669269704616-05abb2e1cd81?w=1920&auto=format&fit=crop" alt="South India">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1920&auto=format&fit=crop" alt="Road Trip">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1920&auto=format&fit=crop" alt="Temples">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=1920&auto=format&fit=crop" alt="Backwaters">
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
       <h1>South India Road Trip</h1>
       <p class="hero-subtitle">December 25, 2025 — January 3, 2026</p>
       <div class="hero-stats">
@@ -612,6 +625,15 @@
         </div>
       </div>
     </div>
+    <div class="hero-carousel-nav">
+      <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+      <div class="carousel-dot" onclick="goToSlide(1)"></div>
+      <div class="carousel-dot" onclick="goToSlide(2)"></div>
+      <div class="carousel-dot" onclick="goToSlide(3)"></div>
+    </div>
+    <a href="#itinerary" class="scroll-indicator">
+      <i class="bi bi-chevron-down"></i>
+    </a>
   </section>
 
   <!-- Route Banner -->
@@ -639,10 +661,33 @@
         <span class="route-city">🏠 Bangalore</span>
       </div>
     </div>
+    
+    <!-- Countdown Clock -->
+    <div class="countdown-clock" id="countdown">
+      <div class="countdown-label">⏰ Days Until Trip Starts</div>
+      <div class="countdown-grid">
+        <div class="countdown-item">
+          <span class="countdown-value" id="days">0</span>
+          <div class="countdown-label-item">Days</div>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="hours">0</span>
+          <div class="countdown-label-item">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="minutes">0</span>
+          <div class="countdown-label-item">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="seconds">0</span>
+          <div class="countdown-label-item">Seconds</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Main Content -->
-  <section class="py-4">
+  <section class="py-4" id="itinerary">
     <div class="container">
       
       <!-- Tab Navigation -->
@@ -662,7 +707,7 @@
           <!-- Day 1 -->
           <div class="day-card" onclick="openDay(1)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600" alt="Road Trip">
+              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop" alt="Road Trip">
               <span class="day-badge">Day 1 • Dec 25</span>
             </div>
             <div class="day-card-body">
@@ -681,7 +726,7 @@
           <!-- Day 2 -->
           <div class="day-card" onclick="openDay(2)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600" alt="Meenakshi Temple">
+              <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&auto=format&fit=crop" alt="Meenakshi Temple">
               <span class="day-badge">Day 2 • Dec 26</span>
             </div>
             <div class="day-card-body">
@@ -700,7 +745,7 @@
           <!-- Day 3 -->
           <div class="day-card" onclick="openDay(3)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1590766940554-634482512f32?w=600" alt="Rameshwaram">
+              <img src="https://images.unsplash.com/photo-1590766940554-634482512f32?w=800&auto=format&fit=crop" alt="Rameshwaram">
               <span class="day-badge">Day 3 • Dec 27</span>
             </div>
             <div class="day-card-body">
@@ -719,7 +764,7 @@
           <!-- Day 4 -->
           <div class="day-card" onclick="openDay(4)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1590766940554-634482512f32?w=600" alt="Kanyakumari">
+              <img src="https://images.unsplash.com/photo-1590766940554-634482512f32?w=800&auto=format&fit=crop" alt="Kanyakumari">
               <span class="day-badge">Day 4 • Dec 28</span>
             </div>
             <div class="day-card-body">
@@ -738,7 +783,7 @@
           <!-- Day 5 -->
           <div class="day-card" onclick="openDay(5)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600" alt="Varkala">
+              <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&auto=format&fit=crop" alt="Varkala">
               <span class="day-badge">Day 5 • Dec 29</span>
             </div>
             <div class="day-card-body">
@@ -757,7 +802,7 @@
           <!-- Day 6 -->
           <div class="day-card" onclick="openDay(6)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=600" alt="Kollam">
+              <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=800&auto=format&fit=crop" alt="Kollam">
               <span class="day-badge">Day 6 • Dec 30</span>
             </div>
             <div class="day-card-body">
@@ -776,7 +821,7 @@
           <!-- Day 7 -->
           <div class="day-card" onclick="openDay(7)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=600" alt="Alleppey">
+              <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=800&auto=format&fit=crop" alt="Alleppey">
               <span class="day-badge">Day 7 • Dec 31</span>
             </div>
             <div class="day-card-body">
@@ -795,7 +840,7 @@
           <!-- Day 8 -->
           <div class="day-card" onclick="openDay(8)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" alt="Wayanad">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop" alt="Wayanad">
               <span class="day-badge">Day 8 • Jan 1</span>
             </div>
             <div class="day-card-body">
@@ -814,7 +859,7 @@
           <!-- Day 9 -->
           <div class="day-card" onclick="openDay(9)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" alt="Wayanad">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop" alt="Wayanad">
               <span class="day-badge">Day 9 • Jan 2</span>
             </div>
             <div class="day-card-body">
@@ -833,7 +878,7 @@
           <!-- Day 10 -->
           <div class="day-card" onclick="openDay(10)">
             <div class="day-card-img">
-              <img src="https://images.unsplash.com/photo-1600100397608-5645e45e3d0e?w=600" alt="Mysore">
+              <img src="https://images.unsplash.com/photo-1600100397608-5645e45e3d0e?w=800&auto=format&fit=crop" alt="Mysore">
               <span class="day-badge">Day 10 • Jan 3</span>
             </div>
             <div class="day-card-body">
@@ -1083,6 +1128,55 @@
       // Scroll to top of detailed section
       document.getElementById('detailed').scrollIntoView({ behavior: 'smooth' });
     }
+    
+    // Hero Carousel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+    
+    // Auto-advance carousel every 5 seconds
+    setInterval(nextSlide, 5000);
+    
+    // Countdown Clock
+    function updateCountdown() {
+      const tripDate = new Date('2025-12-25T03:00:00').getTime();
+      const now = new Date().getTime();
+      const distance = tripDate - now;
+      
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = '<div class="countdown-label">🎉 Trip Started!</div>';
+        return;
+      }
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
