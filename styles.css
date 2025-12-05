@@ -41,31 +41,76 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* Navbar */
+/* Navbar - Default (for pages without hero) */
 .navbar-custom {
-  background: var(--card) !important;
-  border-bottom: 1px solid var(--border);
   padding: 1rem 0;
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
-  transition: background 0.3s, border 0.3s;
-  backdrop-filter: blur(10px);
+  background: var(--card) !important;
+  border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s, border 0.3s, backdrop-filter 0.3s, position 0.3s;
+}
+
+/* Navbar on pages with hero (index.html) - overridden by JavaScript */
+.navbar-custom.hero-navbar {
+  position: absolute;
+  background: transparent !important;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.navbar-custom.hero-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  backdrop-filter: blur(10px);
 }
 
 [data-theme="dark"] .navbar-custom {
   background: var(--card) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-custom.hero-navbar[data-theme="dark"],
+[data-theme="dark"] .navbar-custom.hero-navbar {
+  background: transparent !important;
+  border-bottom: none;
+}
+
+.navbar-custom.hero-navbar.scrolled[data-theme="dark"],
+[data-theme="dark"] .navbar-custom.hero-navbar.scrolled {
+  background: rgba(13, 17, 23, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
 }
 
 .nav-brand {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--text) !important;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: color 0.3s, text-shadow 0.3s;
+  letter-spacing: -0.01em;
+}
+
+/* White text for hero navbar */
+.navbar-custom.hero-navbar .nav-brand {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.navbar-custom.hero-navbar.scrolled .nav-brand {
+  color: var(--text) !important;
+  text-shadow: none;
 }
 
 .nav-link-custom {
@@ -74,12 +119,37 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   padding: 0.5rem 1rem !important;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 
 .nav-link-custom:hover, .nav-link-custom.active {
   color: var(--text) !important;
   background: var(--bg-secondary);
+}
+
+/* White text for hero navbar */
+.navbar-custom.hero-navbar .nav-link-custom {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.navbar-custom.hero-navbar .nav-link-custom:hover, 
+.navbar-custom.hero-navbar .nav-link-custom.active {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.navbar-custom.hero-navbar.scrolled .nav-link-custom {
+  color: var(--text-muted) !important;
+  text-shadow: none;
+}
+
+.navbar-custom.hero-navbar.scrolled .nav-link-custom:hover, 
+.navbar-custom.hero-navbar.scrolled .nav-link-custom.active {
+  color: var(--text) !important;
+  background: var(--bg-secondary);
+  text-shadow: none;
 }
 
 .theme-toggle {
@@ -94,6 +164,23 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+/* White theme toggle for hero navbar */
+.navbar-custom.hero-navbar .theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.navbar-custom.hero-navbar.scrolled .theme-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-shadow: none;
+}
   transition: all 0.2s;
 }
 
@@ -111,6 +198,8 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .hero-carousel {
@@ -153,25 +242,33 @@ a:hover { text-decoration: underline; }
 }
 
 .hero-content h1 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 1.1rem;
+  font-weight: 400;
   margin-bottom: 1rem;
   opacity: 0.95;
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  letter-spacing: 0;
 }
 
 .hero-route-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.95rem;
+  font-weight: 400;
   color: rgba(255,255,255,0.9);
   margin-bottom: 2rem;
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
   line-height: 1.6;
+  letter-spacing: 0;
 }
 
 .hero-stats {
@@ -703,6 +800,484 @@ a:hover { text-decoration: underline; }
   font-size: 0.85rem;
 }
 
+/* Page Header (for hotels, budget, days pages) */
+.page-header {
+  padding: 2rem 0;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* Summary Cards (Hotels & Budget pages) */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.summary-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.summary-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-card.success .summary-value { color: var(--success); }
+.summary-card.warning .summary-value { color: #997404; }
+.summary-card.danger .summary-value { color: var(--danger); }
+.summary-card.hotels .summary-value { color: var(--success); }
+.summary-card.fuel .summary-value { color: var(--warning); }
+.summary-card.tolls .summary-value { color: #6f42c1; }
+.summary-card.food .summary-value { color: #fd7e14; }
+.summary-card.activities .summary-value { color: #0dcaf0; }
+
+/* Alert */
+.alert-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid var(--danger);
+}
+
+/* Hotel Card (Hotels page) */
+.hotel-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hotel-card.paid { border-left: 4px solid var(--success); }
+.hotel-card.cash { border-left: 4px solid var(--warning); }
+.hotel-card.unpaid { border-left: 4px solid var(--danger); }
+
+.hotel-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hotel-dates {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.hotel-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.hotel-location {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.hotel-body {
+  padding: 1.25rem;
+}
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.hotel-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hotel-detail-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hotel-detail-value {
+  font-weight: 600;
+}
+
+.hotel-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+}
+
+.hotel-item i { color: var(--accent); }
+
+.hotel-footer {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+}
+
+.checklist li.yes i { color: var(--success); }
+.checklist li.no i { color: var(--text-muted); }
+
+/* Badges */
+.badge-paid { 
+  background: rgba(25,135,84,0.1); 
+  color: var(--success); 
+  padding: 0.3rem 0.6rem; 
+  border-radius: 6px; 
+  font-size: 0.75rem; 
+  font-weight: 600; 
+}
+
+.badge-cash { 
+  background: rgba(255,193,7,0.2); 
+  color: #997404; 
+  padding: 0.3rem 0.6rem; 
+  border-radius: 6px; 
+  font-size: 0.75rem; 
+  font-weight: 600; 
+}
+
+.badge-unpaid { 
+  background: rgba(220,53,69,0.1); 
+  color: var(--danger); 
+  padding: 0.3rem 0.6rem; 
+  border-radius: 6px; 
+  font-size: 0.75rem; 
+  font-weight: 600; 
+}
+
+.badge-status { 
+  padding: 0.2rem 0.5rem; 
+  border-radius: 4px; 
+  font-size: 0.7rem; 
+  font-weight: 600; 
+}
+
+.badge-due { 
+  background: rgba(220,53,69,0.1); 
+  color: var(--danger); 
+}
+
+/* Buttons */
+.btn-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-primary-custom {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary-custom:hover { 
+  opacity: 0.9; 
+  color: white; 
+  text-decoration: none; 
+}
+
+.btn-outline-custom {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-outline-custom:hover { 
+  background: var(--bg-secondary); 
+  text-decoration: none; 
+}
+
+/* Table */
+.table-custom {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.table-custom table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-custom th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.table-custom td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-custom tr:last-child td {
+  border-bottom: none;
+}
+
+.table-custom .total {
+  font-weight: 700;
+  background: var(--bg-secondary);
+}
+
+/* Budget Page Styles */
+.total-card {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(111, 66, 193, 0.1) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.total-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.total-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.total-note {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-total {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.section-body {
+  padding: 1.25rem;
+}
+
+.fuel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fuel-item {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.fuel-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--warning);
+}
+
+.fuel-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-table th {
+  text-align: left;
+  padding: 0.75rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.budget-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.budget-table tr:last-child td {
+  border-bottom: none;
+}
+
+.budget-table .amount {
+  text-align: right;
+  font-weight: 600;
+}
+
+.budget-table .total-row {
+  background: var(--bg-secondary);
+  font-weight: 700;
+}
+
+.notes-card {
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.notes-title {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notes-list li {
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.notes-list li::before {
+  content: '•';
+  color: var(--accent);
+}
+
+/* Days Page Styles */
+.day-section {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.day-number {
+  background: var(--accent);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.day-info h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.day-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero-content h1 { font-size: 2rem; }
@@ -715,5 +1290,7 @@ a:hover { text-decoration: underline; }
   .day-grid { grid-template-columns: 1fr; }
   .countdown-grid { grid-template-columns: repeat(2, 1fr); }
   .route-banner { margin: -2rem 1rem 2rem; }
+  .summary-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .hotel-grid { grid-template-columns: 1fr; }
 }
 
