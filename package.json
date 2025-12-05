@@ -1,0 +1,12 @@
+{
+    "name": "south-india-itinerary",
+    "version": "1.0.0",
+    "description": "South India Road Trip Itinerary - Dec 25 to Jan 4",
+    "scripts": {
+        "dev": "live-server --port=3000 --open=/index.html",
+        "start": "live-server --port=3000"
+    },
+    "devDependencies": {
+        "live-server": "^1.2.2"
+    }
+}

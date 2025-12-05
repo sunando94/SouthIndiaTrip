@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget — South India Road Trip 2026</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --card-hover: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e5e5e5;
+      --text-muted: #888;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.1);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+    }
+    
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    .navbar-custom {
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      color: var(--text) !important;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .nav-link-custom {
+      color: var(--text-muted) !important;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    
+    .nav-link-custom:hover, .nav-link-custom.active {
+      color: var(--text) !important;
+      background: var(--card);
+    }
+    
+    .page-header {
+      padding: 3rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      color: var(--text-muted);
+    }
+    
+    /* Total Budget Card */
+    .total-budget {
+      background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .total-budget-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .total-budget-value {
+      font-family: 'Fraunces', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .total-budget-note {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* Summary Cards */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .summary-card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-card-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .summary-card-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .summary-card.hotels .summary-card-value { color: var(--success); }
+    .summary-card.fuel .summary-card-value { color: var(--warning); }
+    .summary-card.tolls .summary-card-value { color: var(--purple); }
+    .summary-card.food .summary-card-value { color: #f97316; }
+    .summary-card.activities .summary-card-value { color: #06b6d4; }
+    
+    /* Budget Card */
+    .budget-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    
+    .budget-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .budget-card-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .budget-card-title i {
+      font-size: 1.25rem;
+    }
+    
+    .budget-card-total {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    .budget-card-body {
+      padding: 1.5rem;
+    }
+    
+    /* Table Styles */
+    .budget-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .budget-table th {
+      text-align: left;
+      padding: 0.75rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .budget-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    
+    .budget-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .budget-table .amount {
+      text-align: right;
+      font-weight: 600;
+      font-family: 'Fraunces', serif;
+    }
+    
+    .budget-table .total-row {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    
+    .budget-table .total-row td {
+      border-top: 2px solid var(--border);
+    }
+    
+    /* Fuel Calculator */
+    .fuel-calc {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .fuel-calc-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .fuel-calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    
+    .fuel-param {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .fuel-param-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--warning);
+    }
+    
+    .fuel-param-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    
+    /* Toll Table */
+    .toll-section {
+      margin-top: 1rem;
+    }
+    
+    .toll-route {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    /* Pie Chart Placeholder */
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .pie-chart {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--success) 0deg 130deg,
+        var(--warning) 130deg 200deg,
+        var(--purple) 200deg 240deg,
+        #f97316 240deg 310deg,
+        #06b6d4 310deg 360deg
+      );
+      position: relative;
+    }
+    
+    .pie-chart::after {
+      content: '';
+      position: absolute;
+      inset: 30%;
+      background: var(--card);
+      border-radius: 50%;
+    }
+    
+    .chart-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-left: 2rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    
+    /* Notes */
+    .notes-card {
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .notes-title {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .notes-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .notes-list li {
+      padding: 0.4rem 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: start;
+      gap: 0.5rem;
+    }
+    
+    .notes-list li::before {
+      content: '•';
+      color: var(--accent);
+    }
+    
+    .footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      margin-top: 4rem;
+    }
+    
+    .footer-title {
+      font-family: 'Fraunces', serif;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-text {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: 768px) {
+      .chart-container {
+        flex-direction: column;
+      }
+      .chart-legend {
+        margin-left: 0;
+        margin-top: 1.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar-custom">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <a href="index.html" class="nav-brand">
+          <span>🗺️</span> South India 2026
+        </a>
+        <div class="d-flex gap-1">
+          <a href="index.html" class="nav-link-custom">Itinerary</a>
+          <a href="hotels.html" class="nav-link-custom">Hotels</a>
+          <a href="budget.html" class="nav-link-custom active">Budget</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>💰 Trip Budget</h1>
+      <p>Complete cost breakdown for the 10-day South India road trip</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-4">
+    <div class="container">
+
+      <!-- Total Budget -->
+      <div class="total-budget">
+        <div class="total-budget-label">Estimated Total Budget</div>
+        <div class="total-budget-value">₹65,000 - ₹75,000</div>
+        <div class="total-budget-note">For 2 people • 10 days • ~2,000 km</div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card hotels">
+          <div class="summary-card-icon">🏨</div>
+          <div class="summary-card-value">₹36,619</div>
+          <div class="summary-card-label">Hotels (9 nights)</div>
+        </div>
+        <div class="summary-card fuel">
+          <div class="summary-card-icon">⛽</div>
+          <div class="summary-card-value">₹12,500</div>
+          <div class="summary-card-label">Fuel (~125 L)</div>
+        </div>
+        <div class="summary-card tolls">
+          <div class="summary-card-icon">🛣️</div>
+          <div class="summary-card-value">₹2,500</div>
+          <div class="summary-card-label">Tolls</div>
+        </div>
+        <div class="summary-card food">
+          <div class="summary-card-icon">🍽️</div>
+          <div class="summary-card-value">₹15,000</div>
+          <div class="summary-card-label">Food (Est.)</div>
+        </div>
+        <div class="summary-card activities">
+          <div class="summary-card-icon">🎟️</div>
+          <div class="summary-card-value">₹5,000</div>
+          <div class="summary-card-label">Activities (Est.)</div>
+        </div>
+      </div>
+
+      <!-- Budget Breakdown Chart -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-pie-chart"></i> Budget Distribution
+          </div>
+        </div>
+        <div class="budget-card-body">
+          <div class="chart-container">
+            <div class="pie-chart"></div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-color" style="background: var(--success);"></div>
+                <span>Hotels — 51%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background: var(--warning);"></div>
+                <span>Fuel — 17%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background: var(--purple);"></div>
+                <span>Tolls — 3%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background: #f97316;"></div>
+                <span>Food — 21%</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background: #06b6d4;"></div>
+                <span>Activities — 7%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel Costs -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-building"></i> Accommodation Costs
+          </div>
+          <div class="budget-card-total">₹36,619</div>
+        </div>
+        <div class="budget-card-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Hotel</th>
+                <th>Nights</th>
+                <th>Status</th>
+                <th class="amount">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Madurai</td>
+                <td>Alps Residency</td>
+                <td>2</td>
+                <td><span style="color: var(--warning);">💵 Cash</span></td>
+                <td class="amount">₹6,090</td>
+              </tr>
+              <tr>
+                <td>Kanyakumari</td>
+                <td>Hotel Sridevi</td>
+                <td>2</td>
+                <td><span style="color: var(--success);">✅ Paid</span></td>
+                <td class="amount">₹7,903</td>
+              </tr>
+              <tr>
+                <td>Varkala</td>
+                <td>East West Beach Resorts</td>
+                <td>1</td>
+                <td><span style="color: var(--warning);">💵 Cash</span></td>
+                <td class="amount">₹6,090</td>
+              </tr>
+              <tr>
+                <td>Kollam</td>
+                <td>D Fort Hotel</td>
+                <td>1</td>
+                <td><span style="color: var(--success);">✅ Paid</span></td>
+                <td class="amount">₹3,830</td>
+              </tr>
+              <tr>
+                <td>Alleppey</td>
+                <td>PMC Lakeshore Resort</td>
+                <td>1</td>
+                <td><span style="color: var(--success);">✅ Paid</span></td>
+                <td class="amount">₹5,250</td>
+              </tr>
+              <tr>
+                <td>Wayanad</td>
+                <td>Holidays Garden Resort</td>
+                <td>2</td>
+                <td><span style="color: var(--danger);">⚠️ Due</span></td>
+                <td class="amount">₹7,456</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="4"><strong>Total Accommodation</strong></td>
+                <td class="amount" style="color: var(--success);">₹36,619</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <div class="fuel-param">
+                <div class="fuel-param-value" style="color: var(--success);">₹21,056</div>
+                <div class="fuel-param-label">Already Paid</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="fuel-param">
+                <div class="fuel-param-value" style="color: var(--warning);">₹12,180</div>
+                <div class="fuel-param-label">Pay at Property</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="fuel-param">
+                <div class="fuel-param-value" style="color: var(--danger);">₹7,456</div>
+                <div class="fuel-param-label">Payment Due (MMT)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fuel Costs -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-fuel-pump"></i> Fuel Costs — Honda City 5th Gen
+          </div>
+          <div class="budget-card-total">~₹12,500</div>
+        </div>
+        <div class="budget-card-body">
+          <div class="fuel-calc">
+            <div class="fuel-calc-title">
+              <i class="bi bi-calculator"></i> Fuel Calculation
+            </div>
+            <div class="fuel-calc-grid">
+              <div class="fuel-param">
+                <div class="fuel-param-value">2,000 km</div>
+                <div class="fuel-param-label">Total Distance</div>
+              </div>
+              <div class="fuel-param">
+                <div class="fuel-param-value">16 km/L</div>
+                <div class="fuel-param-label">Mileage (Mixed)</div>
+              </div>
+              <div class="fuel-param">
+                <div class="fuel-param-value">125 L</div>
+                <div class="fuel-param-label">Fuel Needed</div>
+              </div>
+              <div class="fuel-param">
+                <div class="fuel-param-value">₹100/L</div>
+                <div class="fuel-param-label">Petrol Price (Avg)</div>
+              </div>
+            </div>
+          </div>
+
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Route Segment</th>
+                <th>Distance</th>
+                <th>Est. Fuel</th>
+                <th class="amount">Est. Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bangalore → Madurai</td>
+                <td>435 km</td>
+                <td>27 L</td>
+                <td class="amount">₹2,700</td>
+              </tr>
+              <tr>
+                <td>Madurai → Rameshwaram → Kanyakumari</td>
+                <td>470 km</td>
+                <td>29 L</td>
+                <td class="amount">₹2,900</td>
+              </tr>
+              <tr>
+                <td>Kanyakumari → Varkala</td>
+                <td>145 km</td>
+                <td>9 L</td>
+                <td class="amount">₹900</td>
+              </tr>
+              <tr>
+                <td>Varkala → Kollam</td>
+                <td>35 km</td>
+                <td>2 L</td>
+                <td class="amount">₹200</td>
+              </tr>
+              <tr>
+                <td>Kollam → Jatayu → Alleppey</td>
+                <td>110 km</td>
+                <td>7 L</td>
+                <td class="amount">₹700</td>
+              </tr>
+              <tr>
+                <td>Alleppey → Wayanad</td>
+                <td>280 km</td>
+                <td>18 L</td>
+                <td class="amount">₹1,800</td>
+              </tr>
+              <tr>
+                <td>Wayanad → Mysore → Bangalore</td>
+                <td>385 km</td>
+                <td>24 L</td>
+                <td class="amount">₹2,400</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total</strong></td>
+                <td><strong>~1,860 km</strong></td>
+                <td><strong>~116 L</strong></td>
+                <td class="amount" style="color: var(--warning);"><strong>~₹11,600</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="notes-card" style="margin-top: 1rem; background: rgba(245, 158, 11, 0.05);">
+            <div class="notes-title"><i class="bi bi-info-circle"></i> Honda City 5th Gen Specs</div>
+            <ul class="notes-list">
+              <li>Engine: 1.5L i-VTEC Petrol (121 PS)</li>
+              <li>ARAI Mileage: 17.8 km/L</li>
+              <li>Real-world Highway: 16-18 km/L</li>
+              <li>Real-world City: 12-14 km/L</li>
+              <li>Tank Capacity: 40 Liters</li>
+              <li>Estimated refills: 3-4 times during trip</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toll Costs -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-signpost-2"></i> Toll Costs
+          </div>
+          <div class="budget-card-total">~₹2,500</div>
+        </div>
+        <div class="budget-card-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Toll Plazas</th>
+                <th class="amount">Est. Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Bangalore → Madurai
+                  <div class="toll-route">NH44 & NH38 via Salem</div>
+                </td>
+                <td>4-5 plazas</td>
+                <td class="amount">₹600-700</td>
+              </tr>
+              <tr>
+                <td>
+                  Madurai → Rameshwaram
+                  <div class="toll-route">NH87 via Ramanathapuram</div>
+                </td>
+                <td>1-2 plazas</td>
+                <td class="amount">₹100-150</td>
+              </tr>
+              <tr>
+                <td>
+                  Rameshwaram → Kanyakumari
+                  <div class="toll-route">Via Tirunelveli</div>
+                </td>
+                <td>2-3 plazas</td>
+                <td class="amount">₹200-300</td>
+              </tr>
+              <tr>
+                <td>
+                  Kanyakumari → Varkala → Kollam → Alleppey
+                  <div class="toll-route">NH66 Coastal Route</div>
+                </td>
+                <td>2-3 plazas</td>
+                <td class="amount">₹300-400</td>
+              </tr>
+              <tr>
+                <td>
+                  Alleppey → Wayanad
+                  <div class="toll-route">Via Kozhikode (NH66 + Ghat roads)</div>
+                </td>
+                <td>3-4 plazas</td>
+                <td class="amount">₹400-500</td>
+              </tr>
+              <tr>
+                <td>
+                  Wayanad → Mysore → Bangalore
+                  <div class="toll-route">Via Bandipur & Expressway</div>
+                </td>
+                <td>3-4 plazas</td>
+                <td class="amount">₹500-600</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="2"><strong>Total Estimated Tolls</strong></td>
+                <td class="amount" style="color: var(--purple);"><strong>₹2,100 - ₹2,650</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="notes-card" style="margin-top: 1rem;">
+            <div class="notes-title"><i class="bi bi-lightbulb"></i> Toll Tips</div>
+            <ul class="notes-list">
+              <li>Keep FASTag loaded with minimum ₹3,000 balance</li>
+              <li>Some stretches in Kerala have minimal tolls</li>
+              <li>Bandipur forest has no toll but has timing restrictions (6 AM - 9 PM)</li>
+              <li>Toll rates may vary; carry some cash as backup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Food Budget -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-egg-fried"></i> Estimated Food Budget
+          </div>
+          <div class="budget-card-total">~₹15,000</div>
+        </div>
+        <div class="budget-card-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Meal Type</th>
+                <th>Per Day (2 pax)</th>
+                <th>Days</th>
+                <th class="amount">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Breakfast</td>
+                <td>₹300-400</td>
+                <td>10</td>
+                <td class="amount">₹3,500</td>
+              </tr>
+              <tr>
+                <td>Lunch</td>
+                <td>₹500-700</td>
+                <td>10</td>
+                <td class="amount">₹6,000</td>
+              </tr>
+              <tr>
+                <td>Dinner</td>
+                <td>₹400-600</td>
+                <td>10</td>
+                <td class="amount">₹5,000</td>
+              </tr>
+              <tr>
+                <td>Snacks/Coffee</td>
+                <td>₹100-200</td>
+                <td>10</td>
+                <td class="amount">₹1,500</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="3"><strong>Total Food Budget</strong></td>
+                <td class="amount" style="color: #f97316;"><strong>~₹16,000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="notes-card" style="margin-top: 1rem;">
+            <div class="notes-title"><i class="bi bi-info-circle"></i> Note</div>
+            <ul class="notes-list">
+              <li>Kollam hotel includes breakfast (15% off F&B too!)</li>
+              <li>Prices are estimates for non-veg meals at recommended restaurants</li>
+              <li>Coastal Kerala has excellent but slightly expensive seafood</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activities Budget -->
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">
+            <i class="bi bi-ticket-perforated"></i> Activities & Entry Fees
+          </div>
+          <div class="budget-card-total">~₹5,000</div>
+        </div>
+        <div class="budget-card-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Activity / Place</th>
+                <th>Location</th>
+                <th class="amount">Cost (2 pax)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Meenakshi Temple (Camera fee)</td>
+                <td>Madurai</td>
+                <td class="amount">₹100</td>
+              </tr>
+              <tr>
+                <td>Thirumalai Nayak Palace</td>
+                <td>Madurai</td>
+                <td class="amount">₹100</td>
+              </tr>
+              <tr>
+                <td>Vivekananda Rock Ferry</td>
+                <td>Kanyakumari</td>
+                <td class="amount">₹100</td>
+              </tr>
+              <tr>
+                <td>Padmanabhapuram Palace</td>
+                <td>Kanyakumari</td>
+                <td class="amount">₹100</td>
+              </tr>
+              <tr>
+                <td>Jatayu Earth's Center (Cable car + Entry)</td>
+                <td>Kollam-Alleppey</td>
+                <td class="amount">₹1,500</td>
+              </tr>
+              <tr>
+                <td>Shikara Boat Ride</td>
+                <td>Alleppey</td>
+                <td class="amount">₹800</td>
+              </tr>
+              <tr>
+                <td>Edakkal Caves</td>
+                <td>Wayanad</td>
+                <td class="amount">₹60</td>
+              </tr>
+              <tr>
+                <td>Soochipara Falls</td>
+                <td>Wayanad</td>
+                <td class="amount">₹80</td>
+              </tr>
+              <tr>
+                <td>Banasura Sagar Dam Boating</td>
+                <td>Wayanad</td>
+                <td class="amount">₹600</td>
+              </tr>
+              <tr>
+                <td>Pookode Lake Pedal Boat</td>
+                <td>Wayanad</td>
+                <td class="amount">₹200</td>
+              </tr>
+              <tr>
+                <td>Mysore Palace</td>
+                <td>Mysore</td>
+                <td class="amount">₹140</td>
+              </tr>
+              <tr>
+                <td>Ranganathittu Bird Sanctuary Boat</td>
+                <td>Mysore</td>
+                <td class="amount">₹100</td>
+              </tr>
+              <tr>
+                <td>Miscellaneous (Parking, tips, etc.)</td>
+                <td>Various</td>
+                <td class="amount">₹1,000</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="2"><strong>Total Activities</strong></td>
+                <td class="amount" style="color: #06b6d4;"><strong>~₹4,880</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Grand Total -->
+      <div class="budget-card" style="border: 2px solid var(--accent);">
+        <div class="budget-card-header" style="background: var(--accent-soft);">
+          <div class="budget-card-title">
+            <i class="bi bi-calculator"></i> Grand Total Summary
+          </div>
+        </div>
+        <div class="budget-card-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th class="amount">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🏨 Accommodation (7 hotels, 9 nights)</td>
+                <td class="amount" style="color: var(--success);">₹36,619</td>
+              </tr>
+              <tr>
+                <td>⛽ Fuel (~2,000 km @ Honda City 5th Gen)</td>
+                <td class="amount" style="color: var(--warning);">₹12,500</td>
+              </tr>
+              <tr>
+                <td>🛣️ Tolls</td>
+                <td class="amount" style="color: var(--purple);">₹2,500</td>
+              </tr>
+              <tr>
+                <td>🍽️ Food & Beverages (10 days, 2 pax)</td>
+                <td class="amount" style="color: #f97316;">₹15,000</td>
+              </tr>
+              <tr>
+                <td>🎟️ Activities & Entry Fees</td>
+                <td class="amount" style="color: #06b6d4;">₹5,000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>ESTIMATED TOTAL</strong></td>
+                <td class="amount" style="color: var(--accent); font-size: 1.3rem;"><strong>₹71,619</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="fuel-param" style="background: rgba(34, 197, 94, 0.1);">
+                <div class="fuel-param-value" style="color: var(--success);">₹21,056</div>
+                <div class="fuel-param-label">Already Paid</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="fuel-param" style="background: rgba(245, 158, 11, 0.1);">
+                <div class="fuel-param-value" style="color: var(--warning);">₹19,636</div>
+                <div class="fuel-param-label">Pay at Hotels</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="fuel-param" style="background: rgba(239, 68, 68, 0.1);">
+                <div class="fuel-param-value" style="color: var(--danger);">₹30,927</div>
+                <div class="fuel-param-label">Variable Expenses</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-card">
+        <div class="notes-title"><i class="bi bi-exclamation-circle"></i> Important Reminders</div>
+        <ul class="notes-list">
+          <li><strong>Pay ₹7,456</strong> for Wayanad hotel on MakeMyTrip before <strong>Dec 30, 11:59 PM</strong></li>
+          <li>Carry ₹20,000+ cash for hotels paying at property + emergencies</li>
+          <li>Keep FASTag loaded with minimum ₹3,000</li>
+          <li>Budget is for 2 people; food costs may vary based on preferences</li>
+          <li>Fuel prices assumed at ₹100/L; actual may vary by state</li>
+          <li>Activity costs are approximate; some may be optional</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="footer-title">South India Road Trip 2026</h5>
+          <p class="footer-text">Estimated Budget: ₹65,000 - ₹75,000 for 2 people</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <h5 class="footer-title">Quick Links</h5>
+          <p class="footer-text">
+            <a href="index.html">Itinerary</a> • 
+            <a href="hotels.html">Hotels</a> • 
+            <a href="budget.html">Budget</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
