@@ -13,561 +13,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Navbar -->
-      --bg-secondary: #f8f9fa;
-      --card: #ffffff;
-      --border: #e9ecef;
-      --text: #212529;
-      --text-muted: #6c757d;
-      --accent: #0d6efd;
-      --accent-soft: rgba(13, 110, 253, 0.1);
-      --success: #198754;
-      --warning: #ffc107;
-      --danger: #dc3545;
-      --shadow: 0 2px 8px rgba(0,0,0,0.08);
-      --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-    }
-    
-    [data-theme="dark"] {
-      --bg: #0d1117;
-      --bg-secondary: #161b22;
-      --card: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --text-muted: #8b949e;
-      --accent: #58a6ff;
-      --accent-soft: rgba(88, 166, 255, 0.1);
-      --shadow: 0 2px 8px rgba(0,0,0,0.3);
-      --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
-    }
-    
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    
-    /* Navbar */
-    .navbar-custom {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      transition: background 0.3s, border 0.3s;
-    }
-    
-    .nav-brand {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text) !important;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .nav-link-custom {
-      color: var(--text-muted) !important;
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 0.5rem 1rem !important;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    
-    .nav-link-custom:hover, .nav-link-custom.active {
-      color: var(--text) !important;
-      background: var(--bg-secondary);
-    }
-    
-    .theme-toggle {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: all 0.2s;
-    }
-    
-    .theme-toggle:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-    
-    /* Hero */
-    .hero {
-      padding: 4rem 0 3rem;
-      text-align: center;
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .hero h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .hero-subtitle {
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-    
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    
-    .hero-stat {
-      text-align: center;
-    }
-    
-    .hero-stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    
-    .hero-stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* Route */
-    .route-banner {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin: -1.5rem auto 2rem;
-      max-width: 900px;
-      box-shadow: var(--shadow);
-      overflow-x: auto;
-    }
-    
-    .route-cities {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      justify-content: center;
-    }
-    
-    .route-city {
-      background: var(--bg-secondary);
-      padding: 0.35rem 0.7rem;
-      border-radius: 6px;
-      font-weight: 500;
-    }
-    
-    .route-arrow {
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-    
-    /* Tab Navigation */
-    .tab-nav {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.5rem;
-    }
-    
-    .tab-btn {
-      background: transparent;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-radius: 8px 8px 0 0;
-      transition: all 0.2s;
-      position: relative;
-    }
-    
-    .tab-btn:hover {
-      color: var(--text);
-      background: var(--bg-secondary);
-    }
-    
-    .tab-btn.active {
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-    
-    .tab-btn.active::after {
-      content: '';
-      position: absolute;
-      bottom: -0.5rem;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent);
-    }
-    
-    .tab-content {
-      display: none;
-    }
-    
-    .tab-content.active {
-      display: block;
-    }
-    
-    /* Day Cards */
-    .day-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .day-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .day-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
-    }
-    
-    .day-card-img {
-      height: 160px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .day-card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-    
-    .day-card:hover .day-card-img img {
-      transform: scale(1.05);
-    }
-    
-    .day-badge {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: white;
-      color: #212529;
-      padding: 0.3rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    
-    .day-card-body {
-      padding: 1.25rem;
-    }
-    
-    .day-card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    
-    .day-card-route {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .day-card-highlights {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .highlight-tag {
-      background: var(--bg-secondary);
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    
-    /* Detail View */
-    .detail-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    
-    .detail-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    
-    .detail-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-    
-    .detail-date {
-      background: var(--accent-soft);
-      color: var(--accent);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    
-    .detail-body {
-      padding: 1.5rem;
-    }
-    
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-    
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-    
-    .timeline-item {
-      position: relative;
-      padding-bottom: 1.5rem;
-    }
-    
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-    
-    .timeline-dot {
-      position: absolute;
-      left: -2rem;
-      top: 0.2rem;
-      width: 16px;
-      height: 16px;
-      background: var(--card);
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      z-index: 1;
-    }
-    
-    .timeline-dot.food { border-color: #fd7e14; }
-    .timeline-dot.stay { border-color: #198754; }
-    .timeline-dot.drive { border-color: #0d6efd; }
-    
-    .timeline-time {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    
-    .timeline-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    
-    .timeline-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
-    /* Hotel Card */
-    .hotel-card {
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      padding: 1.25rem;
-      margin-top: 1.5rem;
-    }
-    
-    .hotel-card.paid { border-left: 4px solid var(--success); }
-    .hotel-card.cash { border-left: 4px solid var(--warning); }
-    .hotel-card.unpaid { border-left: 4px solid var(--danger); }
-    
-    .hotel-name {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .hotel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.75rem;
-      font-size: 0.85rem;
-    }
-    
-    .hotel-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--text-muted);
-    }
-    
-    .hotel-item i { color: var(--accent); }
-    
-    .badge-paid { background: rgba(25,135,84,0.1); color: var(--success); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
-    .badge-cash { background: rgba(255,193,7,0.2); color: #997404; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
-    
-    /* Buttons */
-    .btn-custom {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    
-    .btn-primary-custom {
-      background: var(--accent);
-      color: white;
-    }
-    
-    .btn-primary-custom:hover {
-      opacity: 0.9;
-      color: white;
-      text-decoration: none;
-    }
-    
-    .btn-outline-custom {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-    
-    .btn-outline-custom:hover {
-      background: var(--bg-secondary);
-      text-decoration: none;
-    }
-    
-    /* Back button */
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    
-    .back-btn:hover {
-      color: var(--text);
-    }
-    
-    /* Footer */
-    .footer {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      padding: 2rem 0;
-      margin-top: 4rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 1.75rem; }
-      .hero-stats { gap: 2rem; }
-      .route-cities { justify-content: flex-start; }
-      .day-grid { grid-template-columns: 1fr; }
-    }
-    
-    /* Modal */
-    .modal-custom {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    
-    .modal-custom.active {
-      display: flex;
-    }
-    
-    .modal-content-custom {
-      background: var(--card);
-      border-radius: 16px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--bg-secondary);
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      cursor: pointer;
-      color: var(--text);
-
-  <!-- Navbar -->
-
-  <!-- Navbar -->
   <nav class="navbar-custom">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
@@ -606,6 +51,12 @@
     <div class="hero-content">
       <h1>South India Road Trip</h1>
       <p class="hero-subtitle">December 25, 2025 — January 3, 2026</p>
+      
+      <!-- Simple Route Text -->
+      <div class="hero-route-text">
+        Bangalore → Madurai → Rameshwaram → Kanyakumari → Varkala → Kollam → Alleppey → Wayanad → Mysore → Bangalore
+      </div>
+      
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-value">10</div>
@@ -624,6 +75,26 @@
           <div class="hero-stat-label">Hotels</div>
         </div>
       </div>
+      
+      <!-- Countdown Clock on Hero -->
+      <div class="hero-countdown" id="countdown">
+        <div class="hero-countdown-label">Days Until Trip Starts</div>
+        <div class="hero-countdown-values">
+          <span class="hero-countdown-value" id="days">0</span>
+          <span class="hero-countdown-separator">:</span>
+          <span class="hero-countdown-value" id="hours">0</span>
+          <span class="hero-countdown-separator">:</span>
+          <span class="hero-countdown-value" id="minutes">0</span>
+          <span class="hero-countdown-separator">:</span>
+          <span class="hero-countdown-value" id="seconds">0</span>
+        </div>
+        <div class="hero-countdown-labels">
+          <span>Days</span>
+          <span>Hours</span>
+          <span>Minutes</span>
+          <span>Seconds</span>
+        </div>
+      </div>
     </div>
     <div class="hero-carousel-nav">
       <div class="carousel-dot active" onclick="goToSlide(0)"></div>
@@ -636,55 +107,6 @@
     </a>
   </section>
 
-  <!-- Route Banner -->
-  <div class="container">
-    <div class="route-banner">
-      <div class="route-cities">
-        <span class="route-city">🏙️ Bangalore</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🛕 Madurai</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🌅 Rameshwaram</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🌊 Kanyakumari</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🏖️ Varkala</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">⛵ Kollam</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🛶 Alleppey</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🏔️ Wayanad</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🏰 Mysore</span>
-        <span class="route-arrow">→</span>
-        <span class="route-city">🏠 Bangalore</span>
-      </div>
-    </div>
-    
-    <!-- Countdown Clock -->
-    <div class="countdown-clock" id="countdown">
-      <div class="countdown-label">⏰ Days Until Trip Starts</div>
-      <div class="countdown-grid">
-        <div class="countdown-item">
-          <span class="countdown-value" id="days">0</span>
-          <div class="countdown-label-item">Days</div>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value" id="hours">0</span>
-          <div class="countdown-label-item">Hours</div>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value" id="minutes">0</span>
-          <div class="countdown-label-item">Minutes</div>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-value" id="seconds">0</span>
-          <div class="countdown-label-item">Seconds</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Main Content -->
   <section class="py-4" id="itinerary">
@@ -1160,7 +582,10 @@
       const distance = tripDate - now;
       
       if (distance < 0) {
-        document.getElementById('countdown').innerHTML = '<div class="countdown-label">🎉 Trip Started!</div>';
+        const countdownEl = document.getElementById('countdown');
+        if (countdownEl) {
+          countdownEl.innerHTML = '<div class="hero-countdown-label">🎉 Trip Started!</div>';
+        }
         return;
       }
       
@@ -1169,10 +594,15 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
     }
     
     updateCountdown();
